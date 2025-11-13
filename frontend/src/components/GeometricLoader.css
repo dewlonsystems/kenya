@@ -1,0 +1,125 @@
+.geometric-loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.geometric-loader {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  animation: rotate 3s linear infinite;
+}
+
+.shape {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  transform: translate(-50%, -50%);
+  animation: fall 2s ease-in-out infinite;
+}
+
+.shape::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #1a3a2c; /* Dark green - your brand color */
+  border-radius: inherit;
+  transform-origin: center;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Triangle shape */
+}
+
+/* Position each shape around the circle */
+.shape-1 {
+  transform: translate(-50%, -50%) rotate(0deg) translate(0, -30px);
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  transform: translate(-50%, -50%) rotate(45deg) translate(0, -30px);
+  animation-delay: -0.25s;
+}
+
+.shape-3 {
+  transform: translate(-50%, -50%) rotate(90deg) translate(0, -30px);
+  animation-delay: -0.5s;
+}
+
+.shape-4 {
+  transform: translate(-50%, -50%) rotate(135deg) translate(0, -30px);
+  animation-delay: -0.75s;
+}
+
+.shape-5 {
+  transform: translate(-50%, -50%) rotate(180deg) translate(0, -30px);
+  animation-delay: -1s;
+}
+
+.shape-6 {
+  transform: translate(-50%, -50%) rotate(225deg) translate(0, -30px);
+  animation-delay: -1.25s;
+}
+
+.shape-7 {
+  transform: translate(-50%, -50%) rotate(270deg) translate(0, -30px);
+  animation-delay: -1.5s;
+}
+
+.shape-8 {
+  transform: translate(-50%, -50%) rotate(315deg) translate(0, -30px);
+  animation-delay: -1.75s;
+}
+
+/* Different sizes for depth effect */
+.shape-1::before { width: 14px; height: 14px; }
+.shape-2::before { width: 15px; height: 15px; }
+.shape-3::before { width: 16px; height: 16px; }
+.shape-4::before { width: 17px; height: 17px; }
+.shape-5::before { width: 18px; height: 18px; }
+.shape-6::before { width: 17px; height: 17px; }
+.shape-7::before { width: 16px; height: 16px; }
+.shape-8::before { width: 15px; height: 15px; }
+
+/* Color variations for depth */
+.shape-1::before { background: #1a3a2c; }
+.shape-2::before { background: #2a5a4a; }
+.shape-3::before { background: #4caf50; }
+.shape-4::before { background: #81c784; }
+.shape-5::before { background: #4caf50; }
+.shape-6::before { background: #2a5a4a; }
+.shape-7::before { background: #1a3a2c; }
+.shape-8::before { background: #2a5a4a; }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fall {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2) translateY(-8px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.1) translateY(-4px);
+  }
+  75% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.15) translateY(-6px);
+  }
+}
