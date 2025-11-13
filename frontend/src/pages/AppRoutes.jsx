@@ -10,12 +10,14 @@ import Profile from './profile/Profile'
 import NotFound from './NotFound'
 import { AuthProvider } from '../contexts/AuthContext'
 import Activation from './activation/Activation'
+import LandingPage from './LandingPage'
 
 function AppRoutes() {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/complete-profile" element={<CompleteProfile />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/jobs" element={<Jobs />} />
@@ -24,6 +26,7 @@ function AppRoutes() {
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/activation" element={<Activation />} />
+        <Route path="/home" element={<LandingPage />} />
       </Routes>
     </AuthProvider>
   )
