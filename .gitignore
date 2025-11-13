@@ -46,4 +46,5 @@ build/
 coverage/
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
+yarn-error.log*"backend/firebase-credentials.json" 
+"backend/firebase-credentials.json" 

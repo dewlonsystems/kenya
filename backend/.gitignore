@@ -1,0 +1,10 @@
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+venv/
+.env
+.env.local
+.env.production
+*.log
+.DS_Store
