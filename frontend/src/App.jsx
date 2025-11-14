@@ -1,11 +1,16 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
-import AppRoutes from './AppRoutes'
-import LoginPage from './pages/LoginPage'
-import CompleteProfile from './pages/CompleteProfile'
-import Activation from './pages/Activation'
 import LandingPage from './pages/LandingPage'
+import Login from './pages/auth/Login'
+import CompleteProfile from './pages/auth/CompleteProfile'
+import Activation from './pages/activation/Activation'
+import DashboardLayout from './layouts/DashboardLayout'
+import Dashboard from './pages/dashboard/Dashboard'
+import Jobs from './pages/jobs/Jobs'
+import Wallet from './pages/wallet/Wallet'
+import Messages from './pages/messages/Messages'
+import Profile from './pages/profile/Profile'
 
 // Protected Route Component
 function ProtectedRoute({ children }) {
@@ -32,7 +37,7 @@ function ProtectedRoute({ children }) {
   return children
 }
 
-// Public Route Component
+// Public Route Component (for routes that don't need authentication)
 function PublicRoute({ children }) {
   const { userData, loading } = useAuth()
   
@@ -58,12 +63,8 @@ function PublicRoute({ children }) {
   return children
 }
 
+// Main App Routes Component
 function AppRoutes() {
-  const location = useLocation()
-  
-  // Define public routes that don't require auth
-  const isPublicRoute = ['/login', '/complete-profile', '/activation'].includes(location.pathname)
-  
   return (
     <Routes>
       {/* Public Routes */}
@@ -74,7 +75,7 @@ function AppRoutes() {
       } />
       <Route path="/login" element={
         <PublicRoute>
-          <LoginPage />
+          <Login />
         </PublicRoute>
       } />
       <Route path="/complete-profile" element={
@@ -91,11 +92,19 @@ function AppRoutes() {
       {/* Protected Routes */}
       <Route path="/dashboard/*" element={
         <ProtectedRoute>
-          <AppRoutes />
+          <DashboardLayout>
+            <Routes>
+              <Route index element={<Dashboard />} />
+              <Route path="jobs" element={<Jobs />} />
+              <Route path="wallet" element={<Wallet />} />
+              <Route path="messages" element={<Messages />} />
+              <Route path="profile" element={<Profile />} />
+            </Routes>
+          </DashboardLayout>
         </ProtectedRoute>
       } />
       
-      {/* Catch-all for any unmatched routes - redirect to dashboard if authenticated */}
+      {/* Catch-all route */}
       <Route path="*" element={
         <ProtectedRoute>
           <Navigate to="/dashboard" replace />
@@ -105,12 +114,13 @@ function AppRoutes() {
   )
 }
 
+// Main App Component
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <Router>
         <AppRoutes />
-      </BrowserRouter>
+      </Router>
     </AuthProvider>
   )
 }
