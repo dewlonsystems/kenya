@@ -19,6 +19,8 @@ import {
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 
+const drawerWidth = 240
+
 function Header() {
   const { userData, currentUser } = useAuth()
   const [anchorEl, setAnchorEl] = useState(null)
