@@ -11,17 +11,23 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true) // Always start as loading
   const [userData, setUserData] = useState(null)
 
   useEffect(() => {
+    // Set a timeout to ensure we don't stay in loading state forever
+    const timeout = setTimeout(() => {
+      if (loading) {
+        setLoading(false)
+      }
+    }, 3000) // 3 second timeout
+
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      clearTimeout(timeout) // Clear timeout if auth state changes
+      
       if (user) {
         try {
-          // Get Firebase ID token
           const token = await user.getIdToken()
-          
-          // Verify with backend
           const response = await verifyFirebaseAuth(token)
           
           if (response.user_exists && response.user_id) {
@@ -56,7 +62,7 @@ export function AuthProvider({ children }) {
               auth_method: response.auth_method,
               user_exists: response.user_exists,
               user_id: response.user_id, // This will be null for new users
-              is_activated: response.is_activated || false,
+              is_activated: false,
               earnings_wallet: 0,
               referral_wallet: 0,
               full_name: response.email.split('@')[0] || 'New User'
@@ -76,7 +82,11 @@ export function AuthProvider({ children }) {
       setLoading(false)
     })
 
-    return unsubscribe
+    // Cleanup function
+    return () => {
+      clearTimeout(timeout)
+      unsubscribe()
+    }
   }, [])
 
   const value = {
@@ -88,7 +98,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   )
 }
