@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { 
   Container, 
   Box, 
@@ -11,34 +11,35 @@ import {
 import { Google, Phone, Email } from '@mui/icons-material'
 import { useAuth } from '../../contexts/AuthContext'
 import { auth } from '../../utils/firebase'
-import { signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPhoneNumber } from 'firebase/auth'
 import { verifyFirebaseAuth } from '../../services/api'
 import { useNavigate } from 'react-router-dom'
 
 function Login() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [firebaseUser, setFirebaseUser] = useState(null)
   const { setUserData } = useAuth()
   const navigate = useNavigate()
 
-  const handleGoogleLogin = async () => {
+  useEffect(() => {
+    if (firebaseUser) {
+      handleFirebaseUser(firebaseUser)
+    }
+  }, [firebaseUser])
+
+  const handleFirebaseUser = async (user) => {
     try {
       setLoading(true)
       setError('')
-      const provider = new GoogleAuthProvider()
-      const result = await signInWithPopup(auth, provider)
-      
-      // Get Firebase ID token
-      const idToken = await result.user.getIdToken()
-      
-      // Verify with backend
+      const idToken = await user.getIdToken()
       const response = await verifyFirebaseAuth(idToken)
       
-      if (response.user_exists && response.user_id) {
-        // User exists in database, redirect to dashboard
+      if (response.user_exists) {
+        // User exists, redirect to dashboard
         navigate('/dashboard')
       } else {
-        // User doesn't exist in database (new user), redirect to complete profile
+        // User doesn't exist, redirect to complete profile
         navigate('/complete-profile', { 
           state: { 
             firebase_uid: response.firebase_uid,
@@ -49,9 +50,23 @@ function Login() {
         })
       }
     } catch (error) {
-      setError('Failed to sign in. Please try again.')
-      console.error('Login error:', error)
+      setError('Failed to verify user with backend')
       setLoading(false)
+      console.error(error)
+    }
+  }
+
+  const handleGoogleLogin = async () => {
+    try {
+      setLoading(true)
+      setError('')
+      const provider = new GoogleAuthProvider()
+      const result = await signInWithPopup(auth, provider)
+      setFirebaseUser(result.user)
+    } catch (error) {
+      setError('Failed to sign in with Google')
+      setLoading(false)
+      console.error(error)
     }
   }
 
@@ -64,26 +79,12 @@ function Login() {
       
       if (email && password) {
         const result = await signInWithEmailAndPassword(auth, email, password)
-        const idToken = await result.user.getIdToken()
-        const response = await verifyFirebaseAuth(idToken)
-        
-        if (response.user_exists && response.user_id) {
-          navigate('/dashboard')
-        } else {
-          navigate('/complete-profile', { 
-            state: { 
-              firebase_uid: response.firebase_uid,
-              email: response.email,
-              phone_number: response.phone_number,
-              auth_method: response.auth_method
-            } 
-          })
-        }
+        setFirebaseUser(result.user)
       }
     } catch (error) {
       setError('Failed to sign in with email')
-      console.error('Email login error:', error)
       setLoading(false)
+      console.error(error)
     }
   }
 
@@ -94,29 +95,13 @@ function Login() {
       const phoneNumber = prompt('Enter phone number (with country code):')
       
       if (phoneNumber) {
-        // Note: Phone auth requires additional setup
-        // This is a simplified version
         const result = await signInWithPhoneNumber(auth, phoneNumber)
-        const idToken = await result.user.getIdToken()
-        const response = await verifyFirebaseAuth(idToken)
-        
-        if (response.user_exists && response.user_id) {
-          navigate('/dashboard')
-        } else {
-          navigate('/complete-profile', { 
-            state: { 
-              firebase_uid: response.firebase_uid,
-              email: response.email,
-              phone_number: response.phone_number,
-              auth_method: response.auth_method
-            } 
-          })
-        }
+        setFirebaseUser(result.user)
       }
     } catch (error) {
       setError('Failed to sign in with phone')
-      console.error('Phone login error:', error)
       setLoading(false)
+      console.error(error)
     }
   }
 

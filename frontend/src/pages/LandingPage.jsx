@@ -110,7 +110,7 @@ function LandingPage() {
                 
                 <Button 
                   component={Link}
-                  to="/jobs"
+                  to="/"
                   variant="outlined" 
                   size="large"
                   sx={{ 
@@ -130,9 +130,15 @@ function LandingPage() {
               </Box>
               
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                <Avatar src="/api/placeholder/40/40" alt="User" sx={{ width: 40, height: 40 }} />
-                <Avatar src="/api/placeholder/40/40" alt="User" sx={{ width: 40, height: 40 }} />
-                <Avatar src="/api/placeholder/40/40" alt="User" sx={{ width: 40, height: 40 }} />
+                <Avatar sx={{ width: 40, height: 40, bgcolor: 'primary.main' }}>
+                  <People />
+                </Avatar>
+                <Avatar sx={{ width: 40, height: 40, bgcolor: 'secondary.main' }}>
+                  <Work />
+                </Avatar>
+                <Avatar sx={{ width: 40, height: 40, bgcolor: 'success.main' }}>
+                  <AttachMoney />
+                </Avatar>
                 <Typography variant="body2" color="textSecondary">
                   Join over 5,000 Kenyan freelancers already earning on our platform
                 </Typography>
@@ -147,7 +153,7 @@ function LandingPage() {
                 boxShadow: '0 8px 24px rgba(0,0,0,0.1)'
               }}>
                 <img 
-                  src="/api/placeholder/600/400" 
+                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
                   alt="Freelancer working" 
                   style={{
                     width: '100%',
@@ -264,7 +270,7 @@ function LandingPage() {
                 boxShadow: '0 8px 24px rgba(0,0,0,0.1)'
               }}>
                 <img 
-                  src="/api/placeholder/600/400" 
+                  src="https://images.unsplash.com/photo-1552664199-fd3e8d6895e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
                   alt="How it works" 
                   style={{
                     width: '100%',
@@ -399,7 +405,9 @@ function LandingPage() {
                   "I've earned over KSh 200,000 in just 6 months. The platform has connected me with amazing clients."
                 </Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Avatar src="/api/placeholder/40/40" alt="Sarah" />
+                  <Avatar sx={{ bgcolor: 'primary.main' }}>
+                    <People />
+                  </Avatar>
                   <Box sx={{ ml: 2 }}>
                     <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>Sarah W.</Typography>
                     <Typography variant="body2" color="textSecondary">Web Developer</Typography>
@@ -420,7 +428,9 @@ function LandingPage() {
                   "As a small business owner, I found skilled freelancers who helped grow my company without hiring full-time staff."
                 </Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Avatar src="/api/placeholder/40/40" alt="David" />
+                  <Avatar sx={{ bgcolor: 'secondary.main' }}>
+                    <Work />
+                  </Avatar>
                   <Box sx={{ ml: 2 }}>
                     <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>David M.</Typography>
                     <Typography variant="body2" color="textSecondary">Business Owner</Typography>
@@ -441,13 +451,47 @@ function LandingPage() {
                   "The referral system is incredible! I've made an extra KSh 15,000 by inviting other freelancers to the platform."
                 </Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Avatar src="/api/placeholder/40/40" alt="John" />
+                  <Avatar sx={{ bgcolor: 'success.main' }}>
+                    <AttachMoney />
+                  </Avatar>
                   <Box sx={{ ml: 2 }}>
                     <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>John K.</Typography>
                     <Typography variant="body2" color="textSecondary">Graphic Designer</Typography>
                   </Box>
                 </Box>
               </Paper>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Stats Section */}
+      <Box sx={{ py: { xs: 6, md: 10 }, backgroundColor: 'white' }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={4} justifyContent="center">
+            <Grid item xs={6} md={3}>
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant="h3" sx={{ fontWeight: 700, color: 'primary.main' }}>5,000+</Typography>
+                <Typography variant="h6" color="textSecondary">Active Freelancers</Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={6} md={3}>
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant="h3" sx={{ fontWeight: 700, color: 'primary.main' }}>1,200+</Typography>
+                <Typography variant="h6" color="textSecondary">Companies</Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={6} md={3}>
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant="h3" sx={{ fontWeight: 700, color: 'primary.main' }}>KSh 50M+</Typography>
+                <Typography variant="h6" color="textSecondary">Paid Out</Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={6} md={3}>
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant="h3" sx={{ fontWeight: 700, color: 'primary.main' }}>98%</Typography>
+                <Typography variant="h6" color="textSecondary">Satisfaction</Typography>
+              </Box>
             </Grid>
           </Grid>
         </Container>
@@ -492,7 +536,7 @@ function LandingPage() {
                 </Button>
                 <Button 
                   component={Link}
-                  to="/jobs" 
+                  to="/"
                   sx={{ 
                     color: 'white', 
                     textTransform: 'none',
