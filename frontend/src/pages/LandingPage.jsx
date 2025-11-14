@@ -49,7 +49,7 @@ function LandingPage() {
             
             <Button 
               component={Link}
-              to="/"
+              to="/login"
               variant="contained" 
               startIcon={<LoginIcon />}
               sx={{ 
@@ -94,7 +94,7 @@ function LandingPage() {
               <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 4 }}>
                 <Button 
                   component={Link}
-                  to="/"
+                  to="/login"
                   variant="contained" 
                   size="large"
                   sx={{ 
@@ -110,7 +110,7 @@ function LandingPage() {
                 
                 <Button 
                   component={Link}
-                  to="/"
+                  to="/login"
                   variant="outlined" 
                   size="large"
                   sx={{ 
@@ -130,15 +130,9 @@ function LandingPage() {
               </Box>
               
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                <Avatar sx={{ width: 40, height: 40, bgcolor: 'primary.main' }}>
-                  <People />
-                </Avatar>
-                <Avatar sx={{ width: 40, height: 40, bgcolor: 'secondary.main' }}>
-                  <Work />
-                </Avatar>
-                <Avatar sx={{ width: 40, height: 40, bgcolor: 'success.main' }}>
-                  <AttachMoney />
-                </Avatar>
+                <Avatar src="/api/placeholder/40/40" alt="User" sx={{ width: 40, height: 40 }} />
+                <Avatar src="/api/placeholder/40/40" alt="User" sx={{ width: 40, height: 40 }} />
+                <Avatar src="/api/placeholder/40/40" alt="User" sx={{ width: 40, height: 40 }} />
                 <Typography variant="body2" color="textSecondary">
                   Join over 5,000 Kenyan freelancers already earning on our platform
                 </Typography>
@@ -153,7 +147,7 @@ function LandingPage() {
                 boxShadow: '0 8px 24px rgba(0,0,0,0.1)'
               }}>
                 <img 
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                  src="/api/placeholder/600/400" 
                   alt="Freelancer working" 
                   style={{
                     width: '100%',
@@ -270,7 +264,7 @@ function LandingPage() {
                 boxShadow: '0 8px 24px rgba(0,0,0,0.1)'
               }}>
                 <img 
-                  src="https://images.unsplash.com/photo-1552664199-fd3e8d6895e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                  src="/api/placeholder/600/400" 
                   alt="How it works" 
                   style={{
                     width: '100%',
@@ -360,7 +354,7 @@ function LandingPage() {
                 
                 <Button 
                   component={Link}
-                  to="/"
+                  to="/login"
                   variant="contained" 
                   size="large"
                   sx={{ 
@@ -405,9 +399,7 @@ function LandingPage() {
                   "I've earned over KSh 200,000 in just 6 months. The platform has connected me with amazing clients."
                 </Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Avatar sx={{ bgcolor: 'primary.main' }}>
-                    <People />
-                  </Avatar>
+                  <Avatar src="/api/placeholder/40/40" alt="Sarah" />
                   <Box sx={{ ml: 2 }}>
                     <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>Sarah W.</Typography>
                     <Typography variant="body2" color="textSecondary">Web Developer</Typography>
@@ -428,9 +420,7 @@ function LandingPage() {
                   "As a small business owner, I found skilled freelancers who helped grow my company without hiring full-time staff."
                 </Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Avatar sx={{ bgcolor: 'secondary.main' }}>
-                    <Work />
-                  </Avatar>
+                  <Avatar src="/api/placeholder/40/40" alt="David" />
                   <Box sx={{ ml: 2 }}>
                     <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>David M.</Typography>
                     <Typography variant="body2" color="textSecondary">Business Owner</Typography>
@@ -451,9 +441,7 @@ function LandingPage() {
                   "The referral system is incredible! I've made an extra KSh 15,000 by inviting other freelancers to the platform."
                 </Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Avatar sx={{ bgcolor: 'success.main' }}>
-                    <AttachMoney />
-                  </Avatar>
+                  <Avatar src="/api/placeholder/40/40" alt="John" />
                   <Box sx={{ ml: 2 }}>
                     <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>John K.</Typography>
                     <Typography variant="body2" color="textSecondary">Graphic Designer</Typography>
@@ -536,7 +524,7 @@ function LandingPage() {
                 </Button>
                 <Button 
                   component={Link}
-                  to="/"
+                  to="/login" 
                   sx={{ 
                     color: 'white', 
                     textTransform: 'none',
@@ -548,7 +536,7 @@ function LandingPage() {
                 </Button>
                 <Button 
                   component={Link}
-                  to="/" 
+                  to="/login" 
                   sx={{ 
                     color: 'white', 
                     textTransform: 'none',
