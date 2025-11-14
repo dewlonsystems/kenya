@@ -1,13 +1,27 @@
 import React, { useState } from 'react'
-import { AppBar, Toolbar, Typography, IconButton, Badge, Menu, MenuItem, Box, Avatar } from '@mui/material'
-import { AccountCircle, Notifications, Menu as MenuIcon, Close } from '@mui/icons-material'
+import { 
+  AppBar, 
+  Toolbar, 
+  Typography, 
+  IconButton, 
+  Badge, 
+  Menu, 
+  MenuItem, 
+  Box, 
+  Avatar 
+} from '@mui/material'
+import { 
+  AccountCircle, 
+  Notifications, 
+  Menu as MenuIcon,
+  Close 
+} from '@mui/icons-material'
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 
 function Header() {
   const { userData, currentUser } = useAuth()
   const [anchorEl, setAnchorEl] = useState(null)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget)
@@ -24,12 +38,16 @@ function Header() {
 
   return (
     <AppBar 
-      position="static" 
+      position="fixed" 
       sx={{ 
         backgroundColor: 'primary.main',
         color: 'white',
         boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-        mb: 2
+        mb: 2,
+        display: { xs: 'none', md: 'flex' },
+        top: 0,
+        left: drawerWidth,
+        width: `calc(100% - ${drawerWidth}px)`
       }}
     >
       <Toolbar>
