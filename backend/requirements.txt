@@ -10,6 +10,7 @@ Django==5.2.8
 djangorestframework==3.16.1
 djangorestframework_simplejwt==5.5.1
 dj-database-url
+django-cors-headers==5.0.0
 firebase_admin==7.1.0
 google-api-core==2.28.1
 google-auth==2.43.0
