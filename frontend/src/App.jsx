@@ -2,17 +2,16 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import LandingPage from './pages/LandingPage'
-import LoginPage from './pages/auth/Login'
+import Login from './pages/auth/Login'
 import CompleteProfile from './pages/auth/CompleteProfile'
 import Activation from './pages/activation/Activation'
+import DashboardLayout from './layouts/DashboardLayout'
 import Dashboard from './pages/dashboard/Dashboard'
 import Jobs from './pages/jobs/Jobs'
 import Wallet from './pages/wallet/Wallet'
 import Messages from './pages/messages/Messages'
 import Profile from './pages/profile/Profile'
 import NotFound from './pages/NotFound'
-import Header from './components/Header'
-import Sidebar from './components/Sidebar'
 
 // Protected Route Component
 function ProtectedRoute({ children }) {
@@ -33,7 +32,7 @@ function ProtectedRoute({ children }) {
   }
   
   if (!userData) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/" replace />
   }
   
   return children
@@ -64,7 +63,6 @@ function PublicRoute({ children }) {
   return children
 }
 
-// Main App Routes Component
 function AppRoutes() {
   return (
     <Routes>
@@ -76,7 +74,7 @@ function AppRoutes() {
       } />
       <Route path="/login" element={
         <PublicRoute>
-          <LoginPage />
+          <Login />
         </PublicRoute>
       } />
       <Route path="/complete-profile" element={
@@ -90,29 +88,18 @@ function AppRoutes() {
         </PublicRoute>
       } />
       
-      {/* Protected Routes with Layout */}
+      {/* Protected Routes */}
       <Route path="/dashboard/*" element={
         <ProtectedRoute>
-          <div style={{ display: 'flex', height: '100vh' }}>
-            <Sidebar />
-            <div style={{ 
-              flexGrow: 1, 
-              padding: '24px',
-              paddingTop: '80px', // Account for header height
-              backgroundColor: '#f8f9f7'
-            }}>
-              <Header />
-              <div style={{ marginTop: '24px' }}>
-                <Routes>
-                  <Route index element={<Dashboard />} />
-                  <Route path="jobs" element={<Jobs />} />
-                  <Route path="wallet" element={<Wallet />} />
-                  <Route path="messages" element={<Messages />} />
-                  <Route path="profile" element={<Profile />} />
-                </Routes>
-              </div>
-            </div>
-          </div>
+          <DashboardLayout>
+            <Routes>
+              <Route index element={<Dashboard />} />
+              <Route path="jobs" element={<Jobs />} />
+              <Route path="wallet" element={<Wallet />} />
+              <Route path="messages" element={<Messages />} />
+              <Route path="profile" element={<Profile />} />
+            </Routes>
+          </DashboardLayout>
         </ProtectedRoute>
       } />
       
@@ -122,7 +109,6 @@ function AppRoutes() {
   )
 }
 
-// Main App Component
 function App() {
   return (
     <AuthProvider>
