@@ -48,38 +48,11 @@ function Dashboard() {
     fetchOverview()
   }, [userData])
 
-  /** =======================
-   *  LOADING STATE
-   * ======================= */
   if (loading) {
     return (
       <Box sx={{ display: 'flex', height: '100vh' }}>
-
-        {/* DESKTOP SIDEBAR */}
-        <Box
-          sx={{
-            display: { xs: 'none', md: 'block' },
-            width: { md: 240 },
-            flexShrink: 0
-          }}
-        >
-          <Sidebar variant="permanent" />
-        </Box>
-
-        {/* MOBILE DRAWER SIDEBAR */}
-        <Sidebar variant="temporary" />
-
-        {/* MAIN CONTENT */}
-        <Box 
-          component="main" 
-          sx={{ 
-            flexGrow: 1, 
-            p: 3,
-            pt: { xs: 10, md: 3 },
-            pl: { xs: 2, md: 4 },
-            pr: { xs: 2, md: 3 }
-          }}
-        >
+        <Sidebar />
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <Header />
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 8 }}>
             <CircularProgress />
@@ -89,47 +62,14 @@ function Dashboard() {
     )
   }
 
-  /** =======================
-   *  MAIN RETURN
-   * ======================= */
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
-
-      {/* DESKTOP SIDEBAR */}
-      <Box
-        sx={{
-          display: { xs: 'none', md: 'block' },
-          width: { md: 240 },
-          flexShrink: 0
-        }}
-      >
-        <Sidebar variant="permanent" />
-      </Box>
-
-      {/* MOBILE DRAWER SIDEBAR */}
-      <Sidebar variant="temporary" />
-
-      {/* MAIN CONTENT */}
-      <Box 
-        component="main" 
-        sx={{ 
-          flexGrow: 1, 
-          p: 3,
-          pt: { xs: 10, md: 3 },
-          pl: { xs: 2, md: 4 },
-          pr: { xs: 2, md: 3 }
-        }}
-      >
+      <Sidebar />
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Header />
-        
         <Container maxWidth="lg">
           <Box sx={{ mt: 4 }}>
-            <Typography 
-              variant="h4" 
-              component="h1" 
-              gutterBottom 
-              sx={{ color: 'primary.main', fontWeight: 600 }}
-            >
+            <Typography variant="h4" component="h1" gutterBottom sx={{ color: 'primary.main', fontWeight: 600 }}>
               Dashboard
             </Typography>
 
@@ -142,10 +82,11 @@ function Dashboard() {
                       <Avatar sx={{ bgcolor: 'secondary.main', mr: 2 }}>
                         <AccountBalanceWallet />
                       </Avatar>
-                      <Typography variant="h6">Total Wallet</Typography>
+                      <Typography variant="h6" component="div">
+                        Total Wallet
+                      </Typography>
                     </Box>
-
-                    <Typography variant="h4" sx={{ color: 'primary.main', fontWeight: 600 }}>
+                    <Typography variant="h4" component="div" sx={{ color: 'primary.main', fontWeight: 600 }}>
                       KSh {overview?.wallet_balance?.toFixed(2) || '0.00'}
                     </Typography>
                   </CardContent>
@@ -159,10 +100,11 @@ function Dashboard() {
                       <Avatar sx={{ bgcolor: 'success.main', mr: 2 }}>
                         <TrendingUp />
                       </Avatar>
-                      <Typography variant="h6">Completed Jobs</Typography>
+                      <Typography variant="h6" component="div">
+                        Completed Jobs
+                      </Typography>
                     </Box>
-
-                    <Typography variant="h4" sx={{ color: 'primary.main', fontWeight: 600 }}>
+                    <Typography variant="h4" component="div" sx={{ color: 'primary.main', fontWeight: 600 }}>
                       {overview?.total_completed_jobs || 0}
                     </Typography>
                   </CardContent>
@@ -176,10 +118,11 @@ function Dashboard() {
                       <Avatar sx={{ bgcolor: 'primary.main', mr: 2 }}>
                         <Work />
                       </Avatar>
-                      <Typography variant="h6">Pending Jobs</Typography>
+                      <Typography variant="h6" component="div">
+                        Pending Jobs
+                      </Typography>
                     </Box>
-
-                    <Typography variant="h4" sx={{ color: 'primary.main', fontWeight: 600 }}>
+                    <Typography variant="h4" component="div" sx={{ color: 'primary.main', fontWeight: 600 }}>
                       {overview?.pending_jobs || 0}
                     </Typography>
                   </CardContent>
@@ -193,10 +136,11 @@ function Dashboard() {
                       <Avatar sx={{ bgcolor: 'secondary.main', mr: 2 }}>
                         <People />
                       </Avatar>
-                      <Typography variant="h6">Referral Earnings</Typography>
+                      <Typography variant="h6" component="div">
+                        Referral Earnings
+                      </Typography>
                     </Box>
-
-                    <Typography variant="h4" sx={{ color: 'primary.main', fontWeight: 600 }}>
+                    <Typography variant="h4" component="div" sx={{ color: 'primary.main', fontWeight: 600 }}>
                       KSh {overview?.referral_earnings?.toFixed(2) || '0.00'}
                     </Typography>
                   </CardContent>
@@ -204,7 +148,7 @@ function Dashboard() {
               </Grid>
             </Grid>
 
-            {/* WALLET BREAKDOWN */}
+            {/* Wallet Breakdown */}
             <Grid container spacing={3} sx={{ mb: 4 }}>
               <Grid item xs={12} md={6}>
                 <Card>
@@ -221,7 +165,6 @@ function Dashboard() {
                           KSh {overview?.earnings_wallet?.toFixed(2) || '0.00'}
                         </Typography>
                       </Grid>
-
                       <Grid item xs={6}>
                         <Typography variant="h6" color="textSecondary">Referral Wallet</Typography>
                         <Typography variant="h5" sx={{ color: 'primary.main', fontWeight: 600 }}>
@@ -257,7 +200,7 @@ function Dashboard() {
               </Grid>
             </Grid>
 
-            {/* QUICK ACTIONS */}
+            {/* Quick Actions */}
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
                 <Card>
