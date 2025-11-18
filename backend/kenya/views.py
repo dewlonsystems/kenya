@@ -1727,3 +1727,38 @@ def get_user_status(request):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
     return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+@csrf_exempt
+def login(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            email = data.get('email')
+            password = data.get('password')
+
+            if not email or not password:
+                return JsonResponse({'error': 'Email and password are required'}, status=400)
+
+            try:
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
+                return JsonResponse({'error': 'Invalid credentials'}, status=401)
+
+            if not user.check_password(password):
+                return JsonResponse({'error': 'Invalid credentials'}, status=401)
+
+            if not user.is_active:
+                return JsonResponse({'error': 'User is inactive'}, status=401)
+
+            # Successful login
+            return JsonResponse({
+                'success': True,
+                'message': 'Login successful',
+                'user_id': str(user.id),
+                'full_name': user.full_name,
+                'email': user.email,
+            })
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    
+    return JsonResponse({'error': 'Method not allowed'}, status=405)

@@ -41,4 +41,5 @@ urlpatterns = [
     path('api/add-skill/', views.add_skill, name='add_skill'),
     path('api/add-portfolio-item/', views.add_portfolio_item, name='add_portfolio_item'),
     path('api/user-status/', views.get_user_status, name='get_user_status'),
+    path('api/accounts/login/', views.login, name='login'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
